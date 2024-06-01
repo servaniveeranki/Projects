@@ -77,3 +77,109 @@ A comprehensive profiling report has been generated and saved as `data_science_j
 ## Conclusion
 This project provided insights into the Data Science Job Salaries dataset, including salary trends, job distributions, and company characteristics. The visualizations and report generated offer a comprehensive understanding of the data.
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+ML_DS_PROJECT
+# Crop Recommendation Model
+
+## Objective
+This project aims to build a machine learning model to recommend crops based on various features. The dataset used for this project contains several features such as N, P, K, temperature, humidity, pH, and rainfall, and the target variable is the crop label.
+
+## Dataset
+The dataset includes the following columns:
+- N: Ratio of Nitrogen content in soil
+- P: Ratio of Phosphorous content in soil
+- K: Ratio of Potassium content in soil
+- temperature: Temperature in degree Celsius
+- humidity: Relative humidity in %
+- pH: pH value of the soil
+- rainfall: Rainfall in mm
+- Label: Type of crop
+
+## Steps Performed
+
+### 1. Data Loading and Initial Exploration
+- Loaded the dataset using pandas.
+- Displayed the first 10 rows of the dataset.
+- Checked for missing values and data types of each column.
+
+### 2. Exploratory Data Analysis (EDA)
+- Displayed the distribution of the target variable.
+- Used pairplots to visualize relationships between features.
+- Created a correlation heatmap to identify feature correlations.
+
+### 3. Data Preprocessing
+- Split the data into features and target variable.
+- Split the data into training and testing sets.
+- Standardized the features using StandardScaler.
+
+### 4. Model Training and Evaluation
+- Trained multiple models: Logistic Regression, Naive Bayes, Support Vector Machine, K-Nearest Neighbors, Decision Tree, Random Forest, Bagging, and Gradient Boosting.
+- Evaluated the models using accuracy score.
+- Selected the best model based on accuracy.
+
+### 5. Model Saving
+- Saved the best model to a file named `model.pkl`.
+
+### 6. Model Usage Demonstration
+- Loaded the saved model.
+- Demonstrated making predictions on the test set using the loaded model.
+
+## Best Model
+The best model was selected based on the highest accuracy score.
+
+## Usage
+
+1. **Load the Dataset**:
+    ```python
+    import pandas as pd
+    df = pd.read_csv('crop_recommendation.csv')
+    ```
+
+2. **Preprocess the Data**:
+    ```python
+    from sklearn.model_selection import train_test_split
+    from sklearn.preprocessing import StandardScaler
+
+    X = df.drop(columns=['Label'])
+    y = df['Label']
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+    scaler = StandardScaler()
+    X_train_scaled = scaler.fit_transform(X_train)
+    X_test_scaled = scaler.transform(X_test)
+    ```
+
+3. **Load the Model**:
+    ```python
+    import pickle
+
+    with open('model.pkl', 'rb') as file:
+        loaded_model = pickle.load(file)
+    ```
+
+4. **Make Predictions**:
+    ```python
+    y_pred = loaded_model.predict(X_test_scaled)
+    ```
+
+5. **Evaluate the Model**:
+    ```python
+    from sklearn.metrics import accuracy_score
+
+    accuracy = accuracy_score(y_test, y_pred)
+    print(f'Accuracy: {accuracy:.4f}')
+    ```
+
+## Requirements
+- pandas
+- numpy
+- matplotlib
+- seaborn
+- scikit-learn
+- pickle
+
+## Conclusion
+This project provided a comprehensive solution for recommending crops based on various soil and weather features. The best model was saved for future predictions, and its usage was demonstrated with the test dataset.
+
+
+
